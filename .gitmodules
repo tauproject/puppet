@@ -1,0 +1,12 @@
+[submodule "modules"]
+	path = modules
+	url = git://github.com/tauproject/puppet-modules.git
+	branch = shimmer/master
+[submodule "manifests"]
+	path = manifests
+	url = git://github.com/tauproject/puppet-manifests.git
+	branch = shimmer/master
+[submodule "data"]
+	path = data
+	url = git://github.com/tauproject/puppet-data.git
+	branch = shimmer/master

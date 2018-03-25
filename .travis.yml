@@ -1,0 +1,8 @@
+sudo: required
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get -qq -y install docker-ce make debhelper dpkg-deb build-essential
+script:
+  - make check
+
+
