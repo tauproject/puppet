@@ -1,4 +1,4 @@
-# Tau Project
+# Tau Hypercomputing Facility
 ## Puppet configuration
 
 ### Licensing

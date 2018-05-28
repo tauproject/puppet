@@ -1,19 +1,25 @@
-# $Tau: puppet/Dockerfile $
+# @(#) $Tau: puppet/docker/puppet-selftest/Dockerfile $
 
 ## ------------------------------------------------------------------------- ##
 ##                          T A U    P R O J E C T                           ##
 ## ------------------------------------------------------------------------- ##
 ##                                                                           ##
-## This file forms part of the Tau Project and is subject to copyright.      ##
+##  Licensed under the Apache License, Version 2.0 (the "License");          ##
+##  you may not use this file except in compliance with the License.         ##
 ##                                                                           ##
-## For full licensing terms, including conditions for redistribution, please ##
-## consult the README document accompanying the source distribution:         ##
+##  You may obtain a copy of the License at:                                 ##
 ##                                                                           ##
-##   <https://github.com/tauproject/puppet>                                  ##
+##      http://www.apache.org/licenses/LICENSE-2.0                           ##
+##                                                                           ##
+##  Unless required by applicable law or agreed to in writing, software      ##
+##  distributed under the License is distributed on an "AS-IS" BASIS,        ##
+##  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. ##
+##  See the License for the specific language governing permissions and      ##
+##  limitations under the License.                                           ##
 ##                                                                           ##
 ## ------------------------------------------------------------------------- ##
 
-FROM debian:stretch
+FROM tauproject/core:shimmer
 
 ENV container docker
 ENV LC_ALL C
@@ -52,17 +58,18 @@ RUN update-rc.d mountkernfs.sh disable && \
 	update-rc.d mountnfs-bootclean.sh disable && \
 	update-rc.d bootmisc.sh disable
 
-COPY docker/rcS /etc/default/rcS
-COPY docker/inittab /etc/inittab
-COPY docker/startup /sbin/container-startup
-COPY docker/ready /sbin/container-ready
-RUN chmod 755 /sbin/container-startup /sbin/container-ready
+RUN mkdir /app
+COPY docker/puppet-selftest/rcS /etc/default/rcS
+COPY docker/puppet-selftest/inittab /etc/inittab
+COPY scripts/docker/entrypoint /app/entrypoint
+COPY scripts/docker/ready /app/ready
+RUN chmod 755 /app/entrypoint /app/ready
 
 COPY modules /usr/share/puppet/modules
 COPY manifests /etc/puppet/manifests
 COPY data /etc/puppet/data
-COPY docker/hiera.yaml /etc/puppet/hiera.yaml
-WORKDIR /root
+COPY docker/puppet-selftest/selftest.yaml /etc/puppet/data/nodes/selftest.yaml
+COPY docker/puppet-selftest/hiera.yaml /etc/puppet/hiera.yaml
 CMD /bin/bash
 
-ENTRYPOINT [ "/sbin/container-startup" ]
+ENTRYPOINT [ "/app/entrypoint" ]
