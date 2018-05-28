@@ -21,22 +21,11 @@
 
 FROM tauproject/core:shimmer
 
-ENV container docker
-ENV LC_ALL C
-ENV DEBIAN_FRONTEND noninteractive
-RUN echo 'APT::Install-Recommends "0"; \n\
-APT::Get::Assume-Yes "true"; \n\
-APT::Get::force-yes "true"; \n\
-APT::Install-Suggests "0";' > /etc/apt/apt.conf.d/01buildconfig
-
 RUN apt-get update -qq && \
 	apt-get -qq -y install mingetty puppet lsb-base lsb-release gpg \
-			apt-transport-https
-
-RUN apt-get install procps
+		apt-transport-https procps initscripts sysv-rc
 
 RUN cd /tmp && \
-	apt-get install -qq -y initscripts sysv-rc && \
 	apt-get download sysvinit-core && \
 	dpkg --unpack sysvinit-core*.deb && \
 	rm /var/lib/dpkg/info/sysvinit-core.postinst && \
