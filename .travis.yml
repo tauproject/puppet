@@ -1,8 +1,9 @@
 sudo: required
 before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get -qq -y install docker-ce make debhelper dpkg-dev build-essential
+- sudo apt-get -qq update
+- sudo apt-get -qq -y install docker-ce make debhelper dpkg-dev build-essential
 script:
-  - make check
-
-
+- make check
+notifications:
+  slack:
+    secure: HdCNO5jS6b8SyM+SgWGEpZYBNc90qU7Gf+Axy1PTN/EfQFFcvT4X0bEbPUObUfv6y3I7Xygp8TWMyZywVsFionhdQRx5fXyBMroK+5hLyce0tCDv+pyieAm2DuVQCrwTOHer+9V+hem/zZi20wXhUUr3Har+2wTkiR5CvX/STMaOBOSpANJYbHRN2H9pPuRHADtrM2J1g3xAwzCN/0WSvX1AhhCIJDDW9lq8Uky18xPLUeGnnXAry6I3YMd8bEHkFI2BltXC07U8mljEh+HLO+5s5CZn7UpstsVxFPkLunhSRHPc1/O86CjoqZgc8u9UhToe8NVWOxvMjZ2PacJzd/5rCmCEuRBZkDpayc0aCYNs/8W08i3nEt9G/zdU0aCB/yY9u86xEqXNktj28IS5ynCD/MG/nBog//4xJQoCPebprLjqJ1P7UnHANWLjNoBo3Lit5rrv5P+JIr59wCYTPSpshI4B7i38yHwQZ7xG691hlamMOF6lNyy8piePMQm+iWsu3CTRB4l09UpLkRdkYbd26uSq7djvn6H3bC2ZDiXz6RhA4hfmvC3C/KVkiWKIbOTOuLM5Bo7A4VcbQzCNk84X6okURLbpoE9sjrZPc9J8x6484vgV3psnjdVjA4gTWZiZsVKvnSZ4IJZIz/Uk2rOHJHZNMNZ2W4j43bBatgo=
