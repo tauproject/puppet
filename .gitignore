@@ -24,3 +24,5 @@ Makefile.in
 /stamp-h*
 /confdefs.h
 /hiera.yaml
+!/hiera.yaml.in
+
