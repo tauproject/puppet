@@ -34,7 +34,7 @@ container:
 	$(DOCKER) tag $(IMAGENAME) $(IMAGENAME):$(RELEASE)
 
 check: container
-	$(DOCKER) run $(DOCKERRUNFLAGS) $(IMAGENAME) puppet apply /etc/puppet/manifests/site.pp
+	$(DOCKER) run $(DOCKERRUNFLAGS) $(IMAGENAME) puppet apply --verbose /etc/puppet/manifests/site.pp
 
 diagnose: container
 	$(DOCKER) run $(DOCKERRUNFLAGS) $(IMAGENAME) sh -c "puppet apply --verbose /etc/puppet/manifests/site.pp ; bash"
